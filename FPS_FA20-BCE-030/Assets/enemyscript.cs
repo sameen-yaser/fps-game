@@ -12,6 +12,12 @@ public class enemyscript : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    void Update()
+    {
+        transform.Translate(0, 0, 0.1f);
+        transform.LookAt(fps.transform);
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         if(col.gameObject.name.StartsWith("bullet"))
