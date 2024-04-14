@@ -10,6 +10,7 @@ public class enemyscript : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        anim.SetBool("isDead", false);
     }
 
     void Update()
@@ -20,10 +21,16 @@ public class enemyscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name.StartsWith("bullet"))
+        if (col.gameObject.name.StartsWith("bullet"))
         {
-            anim.SetTrigger("dead");
+            print("hittt");
+            anim.SetBool("isDead", true);
         }
-        
+        if (col.gameObject.name.StartsWith("grenade"))
+        {
+            print("hittt");
+            anim.SetBool("isDead", true);
+        }
+
     }
 }
