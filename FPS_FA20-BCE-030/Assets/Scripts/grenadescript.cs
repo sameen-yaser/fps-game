@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class bulletscript : MonoBehaviour
+public class grenadescript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class bulletscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name.StartsWith("enemy"))
+        if(col.gameObject.tag.StartsWith("enemy"))
         {
             Destroy(transform.gameObject);
         }
