@@ -15,7 +15,6 @@ public class enemyscript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, 0, 0.1f);
         transform.LookAt(fps.transform);
     }
 
