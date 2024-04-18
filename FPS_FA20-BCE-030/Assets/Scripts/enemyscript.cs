@@ -41,13 +41,17 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision col)
+    //private void OnCollisionEnter(Collision col)
+    //{
+     //   if (col.gameObject.name.StartsWith("bullet") || col.gameObject.name.StartsWith("grenade"))
+       // {
+         //   print("hittt");
+           // anim.SetBool("isDead", true);
+            //dieaudio.Play();
+        //}
+    //}
+    public void die()
     {
-        if (col.gameObject.name.StartsWith("bullet") || col.gameObject.name.StartsWith("grenade"))
-        {
-            print("hittt");
-            anim.SetBool("isDead", true);
-            dieaudio.Play();
-        }
+        anim.SetBool("isDead", true);
     }
 }
