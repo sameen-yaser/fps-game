@@ -15,7 +15,7 @@ public class bulletscript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, 1);
+        transform.Translate(0, 0, 0.2f);
     }
 
     private void OnCollisionEnter(Collision col)
@@ -26,7 +26,6 @@ public class bulletscript : MonoBehaviour
             {
                 dieaudio.Play();
             }
-             // Use gameObject directly to refer to the object this script is attached to
         }
     }
 }
