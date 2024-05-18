@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class grenadescript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioSource grenadeaudio;
     void Start()
     {
-        
+        grenadeaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,10 +19,10 @@ public class grenadescript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag.StartsWith("enemy"))
+        if (col.gameObject.tag.StartsWith("enemy"))
         {
-            Destroy(transform.gameObject);
+            grenadeaudio.Play();
         }
-        
+
     }
 }

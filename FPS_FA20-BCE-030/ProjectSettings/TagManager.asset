@@ -6,6 +6,13 @@ TagManager:
   tags:
   - Fire
   - enemy
+  - mainc
+  - ebullet
+  - med
+  - ammo
+  - grenade
+  - win
+  - cp
   layers:
   - Default
   - TransparentFX
@@ -13,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - button
   - 
   - 
   - 

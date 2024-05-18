@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class bulletscript : MonoBehaviour
 {
+    public AudioSource dieaudio;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        dieaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,10 +20,13 @@ public class bulletscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.tag.StartsWith("enemy"))
+        if (col.gameObject.tag.StartsWith("enemy"))
         {
-            Destroy(transform.gameObject);
+            if (dieaudio != null && dieaudio.enabled)
+            {
+                dieaudio.Play();
+            }
+             // Use gameObject directly to refer to the object this script is attached to
         }
-        
     }
 }
