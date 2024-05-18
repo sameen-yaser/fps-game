@@ -27,6 +27,7 @@ public class enemyscript : MonoBehaviour
             print("Player detected");
             isRoaring = true;
             anim.SetTrigger("Roar");
+            transform.LookAt(fps.transform); // Look at the player while roaring
 
             // Play roar audio once
             if (!roarAudio.isPlaying)
@@ -50,17 +51,12 @@ public class enemyscript : MonoBehaviour
         {
             isRoaring = false;
             isAttacking = true;
+            anim.SetTrigger("Attack");
         }
     }
 
-    private void OnCollisionEnter(Collision col)
+    public void die()
     {
-        if (!isDead && (col.gameObject.name.StartsWith("bullet") || col.gameObject.name.StartsWith("grenade")))
-        {
-            print("hittt");
-            isDead = true;
-            isAttacking = false; // Stop attacking when dead
-            anim.SetTrigger("Die");
-        }
+        anim.SetTrigger("Die");
     }
 }

@@ -48,6 +48,19 @@ public class gunscript : MonoBehaviour
     void ShootBullet()
     {
         Instantiate(bullet, transform.position, transform.rotation);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+
+            {
+                Debug.Log("Hit: " + hit.collider.name);
+            if (hit.transform.tag == "enemy")
+            {
+                //die animation
+                enemyscript enemy = hit.transform.GetComponent<enemyscript>();
+                enemy.die();
+            }
+        }
+
         bulletaudio.Play();
         bulletCount--;
         UpdateBulletCountText();
@@ -89,12 +102,6 @@ public class gunscript : MonoBehaviour
         {
             bulletCount = 20;
             UpdateBulletCountText();
-            Destroy(col.gameObject);
-        }
-        if (col.gameObject.tag.StartsWith("grenade"))
-        {
-            grenadeCount++;
-            UpdateGrenadeCountText();
             Destroy(col.gameObject);
         }
 
