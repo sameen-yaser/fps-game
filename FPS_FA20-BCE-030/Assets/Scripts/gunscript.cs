@@ -10,15 +10,12 @@ public class gunscript : MonoBehaviour
 
     public Slider HealthBar;
     public Text bulletCountText;
-    public Text grenadeCountText;
     public GameObject bullet;
-    public GameObject grenade;
     public AudioSource bulletaudio;
 
     private float maxHealth = 50;
     private float health;
     private int bulletCount = 20;
-    private int grenadeCount = 2;
 
     void Awake()
     {
@@ -27,7 +24,6 @@ public class gunscript : MonoBehaviour
         HealthBar.value = health;
 
         UpdateBulletCountText();
-        UpdateGrenadeCountText();
 
         bulletaudio = GetComponent<AudioSource>();
     }
@@ -39,10 +35,6 @@ public class gunscript : MonoBehaviour
             ShootBullet();
         }
 
-        if (Input.GetKeyDown(KeyCode.G) && grenadeCount > 0)
-        {
-            LaunchGrenade();
-        }
     }
 
     void ShootBullet()
@@ -66,20 +58,12 @@ public class gunscript : MonoBehaviour
         UpdateBulletCountText();
     }
 
-    void LaunchGrenade()
-    {
-        Instantiate(grenade, transform.position, transform.rotation);
-        grenadeCount--;
-        UpdateGrenadeCountText();
-    }
-
-
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("enemy"))
         {
             print("Player hit");
-            health -= 1;
+            health -= 10;
             HealthBar.value = health;
 
             if (health <= 0)
@@ -116,9 +100,5 @@ public class gunscript : MonoBehaviour
         bulletCountText.text = "Bullets: " + bulletCount.ToString();
     }
 
-    void UpdateGrenadeCountText()
-    {
-        grenadeCountText.text = "Grenades: " + grenadeCount.ToString();
-    }
 
 }
