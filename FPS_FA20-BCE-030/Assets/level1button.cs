@@ -1,12 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Required to load scenes
+using UnityEngine.SceneManagement;
 
 public class level1button : MonoBehaviour
 {
-    // Function to be called when the button is clicked
-    public void LoadScene(string Level1)
+    public void level1()
     {
-        SceneManager.LoadScene(Level1);
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void level2()
+    {
+        SceneManager.LoadScene("Level2");
     }
 }
-
