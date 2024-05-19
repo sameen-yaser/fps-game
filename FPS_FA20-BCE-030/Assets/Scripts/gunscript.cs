@@ -69,7 +69,7 @@ public class gunscript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            if (hit.transform.tag == "enemy" && enemyAlive)
+            if (hit.transform.tag == "enemy")
             {
                 //die animation
                 enemyscript enemy = hit.transform.GetComponent<enemyscript>();
@@ -84,7 +84,7 @@ public class gunscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("enemy") && enemyAlive)
+        if (col.gameObject.CompareTag("enemy"))
         {
             print("Player hit");
             durationTimer = 0;
