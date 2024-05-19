@@ -13,6 +13,7 @@ TagManager:
   - grenade
   - win
   - cp
+  - key
   layers:
   - Default
   - TransparentFX
