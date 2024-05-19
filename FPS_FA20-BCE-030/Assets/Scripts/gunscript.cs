@@ -67,7 +67,6 @@ public class gunscript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            Debug.Log("Hit: " + hit.collider.name);
             if (hit.transform.tag == "enemy" && enemyAlive)
             {
                 //die animation
@@ -84,6 +83,19 @@ public class gunscript : MonoBehaviour
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("enemy") && enemyAlive)
+        {
+            print("Player hit");
+            durationTimer = 0;
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+            health -= 10;
+            HealthBar.value = health;
+
+            if (health <= 0)
+            {
+                Debug.Log("Player died!");
+            }
+        }
+        if (col.gameObject.CompareTag("boss"))
         {
             print("Player hit");
             durationTimer = 0;
