@@ -14,4 +14,8 @@ public class levelbutton : MonoBehaviour
     {
         SceneManager.LoadScene("Level2");
     }
+    public void mainmenu()
+    {
+        SceneManager.LoadScene("menu");
+    }
 }
