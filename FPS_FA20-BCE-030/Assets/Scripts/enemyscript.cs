@@ -7,6 +7,7 @@ public class enemyscript : MonoBehaviour
     Animator anim;
     public GameObject fps;
     public float detectionRadius = 10f; // Set detection radius to 10 units
+    public float detectionRadius1 = 1f;
     public float moveSpeed = 5f; // Speed at which the enemy moves
     public float roarDuration = 2f; // Duration of the roar in seconds
     public AudioSource roarAudio; // Reference to the roar audio source
@@ -34,6 +35,7 @@ public class enemyscript : MonoBehaviour
             transform.LookAt(fps.transform);
             anim.SetTrigger("Roar");
 
+
             // Play roar audio once
             if (!roarAudio.isPlaying)
             {
@@ -44,6 +46,12 @@ public class enemyscript : MonoBehaviour
             hasRoared = true; // Set the flag to true to indicate that the enemy has roared
             // Start the roar coroutine
             StartCoroutine(RoarThenAttack());
+        }
+        if(distanceToPlayer <= detectionRadius1)
+        {
+            Debug.Log("Player detected again");
+            transform.LookAt(fps.transform);
+            anim.SetTrigger("Attack");
         }
     }
 
@@ -58,7 +66,7 @@ public class enemyscript : MonoBehaviour
         if (isAlive)
         {
             Debug.Log("Moving towards the player");
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("Run");
 
             while (Vector3.Distance(transform.position, fps.transform.position) > 1f) // Ensure the enemy stops when close enough to the player
             {
