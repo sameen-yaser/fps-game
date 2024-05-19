@@ -102,6 +102,12 @@ public class Rikayon : MonoBehaviour
         isAlive = false;
         anim.SetTrigger("Die");
         healthBar.gameObject.SetActive(false); // Hide the health bar when the boss dies
-        // Add any additional death effects here
+        StartCoroutine(DestroyAfterDelay(2f)); // Destroy the boss after a delay of 2 seconds
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject); // Destroy the enemy object after the delay
     }
 }

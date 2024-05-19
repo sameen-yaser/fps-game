@@ -26,7 +26,6 @@ public class enemyscript : MonoBehaviour
         if (!isAlive) return; // If the enemy is dead, stop updating
 
         float distanceToPlayer = Vector3.Distance(transform.position, fps.transform.position);
-        Debug.Log($"Distance to player: {distanceToPlayer}");
 
         if (distanceToPlayer <= detectionRadius && !isRoaring && !hasRoared)
         {

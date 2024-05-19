@@ -23,6 +23,7 @@ public class gunscript : MonoBehaviour
     private float durationTimer; //timer to check against duration
 
     private bool enemyAlive = true; // Flag to track if the enemy is alive
+    private bool hasKey = false; // Flag to check if the key has been picked up
 
     void Awake()
     {
@@ -48,7 +49,8 @@ public class gunscript : MonoBehaviour
         }
         if (overlay.color.a > 0) // Check if the alpha value is greater than 0
         {
-            if (health < 10){
+            if (health < 10)
+            {
                 return;
             }
             durationTimer += Time.deltaTime;
@@ -92,6 +94,7 @@ public class gunscript : MonoBehaviour
 
             if (health <= 0)
             {
+                SceneManager.LoadScene("GameOver");
                 Debug.Log("Player died!");
             }
         }
@@ -105,6 +108,7 @@ public class gunscript : MonoBehaviour
 
             if (health <= 0)
             {
+                SceneManager.LoadScene("GameOver");
                 Debug.Log("Player died!");
             }
         }
@@ -125,9 +129,27 @@ public class gunscript : MonoBehaviour
             Destroy(col.gameObject);
         }
 
+        if (col.gameObject.tag.StartsWith("win1"))
+        {
+            SceneManager.LoadScene("Level2");
+        }
+
+        if (col.gameObject.tag.StartsWith("key"))
+        {
+            hasKey = true; // Set the flag to true when the key is picked up
+            Destroy(col.gameObject);
+        }
+
         if (col.gameObject.tag.StartsWith("win"))
         {
-            SceneManager.LoadScene("GameOver");
+            if (hasKey)
+            {
+                SceneManager.LoadScene("menu");
+            }
+            else
+            {
+                Debug.Log("You need to pick up the key first!");
+            }
         }
     }
 
