@@ -17,6 +17,13 @@ public class gunscript : MonoBehaviour
     private float health;
     private int bulletCount = 20;
 
+    public Image overlay;
+    public float duration; //how long stays opaque
+    public float fadeSpeed; //how fast fades
+    private float durationTimer; //timer to check against duration
+
+    private bool enemyAlive = true; // Flag to track if the enemy is alive
+
     void Awake()
     {
         health = maxHealth;
@@ -28,13 +35,30 @@ public class gunscript : MonoBehaviour
         bulletaudio = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && bulletCount > 0)
         {
             ShootBullet();
         }
-
+        if (overlay.color.a > 0) // Check if the alpha value is greater than 0
+        {
+            if (health < 10){
+                return;
+            }
+            durationTimer += Time.deltaTime;
+            if (durationTimer > duration)
+            {
+                float tempAlpha = overlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
+            }
+        }
     }
 
     void ShootBullet()
@@ -42,17 +66,16 @@ public class gunscript : MonoBehaviour
         Instantiate(bullet, transform.position, transform.rotation);
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
-
-            {
-                Debug.Log("Hit: " + hit.collider.name);
-            if (hit.transform.tag == "enemy")
+        {
+            Debug.Log("Hit: " + hit.collider.name);
+            if (hit.transform.tag == "enemy" && enemyAlive)
             {
                 //die animation
                 enemyscript enemy = hit.transform.GetComponent<enemyscript>();
                 enemy.die();
+                enemyAlive = false; // Set the flag to false when the enemy dies
             }
         }
-
         bulletaudio.Play();
         bulletCount--;
         UpdateBulletCountText();
@@ -60,9 +83,11 @@ public class gunscript : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("enemy"))
+        if (col.gameObject.CompareTag("enemy") && enemyAlive)
         {
             print("Player hit");
+            durationTimer = 0;
+            overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
             health -= 10;
             HealthBar.value = health;
 
@@ -70,7 +95,6 @@ public class gunscript : MonoBehaviour
             {
                 Debug.Log("Player died!");
             }
-
         }
 
         if (col.gameObject.tag.StartsWith("med"))
@@ -99,6 +123,4 @@ public class gunscript : MonoBehaviour
     {
         bulletCountText.text = "Bullets: " + bulletCount.ToString();
     }
-
-
 }
