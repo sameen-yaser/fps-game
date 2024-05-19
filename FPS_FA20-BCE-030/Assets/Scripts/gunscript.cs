@@ -89,7 +89,7 @@ public class gunscript : MonoBehaviour
             print("Player hit");
             durationTimer = 0;
             overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
-            health -= 10;
+            health -= 5;
             HealthBar.value = health;
 
             if (health <= 0)
