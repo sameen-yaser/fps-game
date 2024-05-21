@@ -16,6 +16,8 @@ TagManager:
   - key
   - boss
   - win1
+  - win2
+  - win3
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,7 @@ public class gunscript : MonoBehaviour
     private float durationTimer; //timer to check against duration
 
     private bool enemyAlive = true; // Flag to track if the enemy is alive
-    private bool hasKey = false; // Flag to check if the key has been picked up
+    private int keyCount = 0; // Counter to track the number of keys picked up
 
     void Awake()
     {
@@ -71,7 +71,7 @@ public class gunscript : MonoBehaviour
         {
             if (hit.transform.tag == "enemy")
             {
-                //die animation
+                // Die animation
                 enemyscript enemy = hit.transform.GetComponent<enemyscript>();
                 enemy.die();
                 enemyAlive = false; // Set the flag to false when the enemy dies
@@ -136,19 +136,31 @@ public class gunscript : MonoBehaviour
 
         if (col.gameObject.tag.StartsWith("key"))
         {
-            hasKey = true; // Set the flag to true when the key is picked up
+            keyCount++; // Increment the key counter when a key is picked up
             Destroy(col.gameObject);
         }
 
-        if (col.gameObject.tag.StartsWith("win"))
+        if (col.gameObject.tag.StartsWith("win2"))
         {
-            if (hasKey)
+            if (keyCount >= 1)
+            {
+                SceneManager.LoadScene("Level3");
+            }
+            else
+            {
+                Debug.Log("You need to pick up the key first!");
+            }
+        }
+
+        if (col.gameObject.tag.StartsWith("win3"))
+        {
+            if (keyCount >= 2)
             {
                 SceneManager.LoadScene("menu");
             }
             else
             {
-                Debug.Log("You need to pick up the key first!");
+                Debug.Log("You need to pick up two keys first!");
             }
         }
     }
