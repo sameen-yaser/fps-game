@@ -163,6 +163,11 @@ public class gunscript : MonoBehaviour
                 Debug.Log("You need to pick up two keys first!");
             }
         }
+        if (col.gameObject.CompareTag("ocean"))
+        {
+            Debug.Log("You drowned!");
+            SceneManager.LoadScene("Drowned");
+        }
     }
 
     void UpdateBulletCountText()

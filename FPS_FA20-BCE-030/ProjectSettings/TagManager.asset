@@ -18,6 +18,7 @@ TagManager:
   - win1
   - win2
   - win3
+  - ocean
   layers:
   - Default
   - TransparentFX

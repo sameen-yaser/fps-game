@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level3.unity
     guid: 62c071a32f0c94e4bbb8e185730c3ae1
+  - enabled: 1
+    path: Assets/Scenes/Drowned.unity
+    guid: 1a3137cc3aa5f434b94194173aa53d59
   m_configObjects: {}
